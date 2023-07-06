@@ -12,8 +12,6 @@ schema
 type User @model {
   name: String!
   email: Email
-  posts: [Post]
-  comments: [Comment]
 }
 
 # Start your backend
