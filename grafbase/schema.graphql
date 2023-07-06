@@ -11,7 +11,7 @@ schema
 
 type User @model {
   name: String!
-  email: Email @unique
+  email: Email! @unique
 }
 
 # Start your backend
