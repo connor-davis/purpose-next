@@ -30,7 +30,7 @@ type UserBusinessInformation @model {
   name: String! @unique
   description: String
   registered: Boolean
-  registrationNumber: String @unique
+  registrationNumber: String! @unique
   employees: Int
   schoolKids: Int
   staff: Int
