@@ -1,29 +1,38 @@
 "use client";
 
+import { NavigationMenuLink } from "@radix-ui/react-navigation-menu";
 import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
   sideNavigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
-import { cn } from "@/lib/utils";
+import { SignOutButton } from "@clerk/nextjs";
+import { SignedIn } from "@clerk/nextjs";
 
 const BottomNavigation = () => {
   return (
-    <NavigationMenu className="flex flex-col">
-      <NavigationMenuList className="flex flex-col w-[300px] h-full space-x-0 overflow-y-auto">
-        <NavigationMenuItem className="w-full p-1">
-          <Link href="/" legacyBehavior passHref>
-            <NavigationMenuLink className={sideNavigationMenuTriggerStyle()}>
-              Logout
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <SignedIn>
+      <NavigationMenu className="flex flex-col">
+        <NavigationMenuList className="flex flex-col w-[300px] h-full space-x-0 overflow-y-auto p-1">
+          <NavigationMenuItem className="w-full p-1">
+            <Link href="/user-profile" legacyBehavior passHref>
+              <NavigationMenuLink className={sideNavigationMenuTriggerStyle()}>
+                Profile
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem className="w-full p-1">
+            <SignOutButton>
+              <button className={sideNavigationMenuTriggerStyle()}>
+                Logout
+              </button>
+            </SignOutButton>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </SignedIn>
   );
 };
 

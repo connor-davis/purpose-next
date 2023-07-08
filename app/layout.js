@@ -1,8 +1,7 @@
+import AuthenticationGuard from "@/components/guards/AuthenticationGuard";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import MainNavigation from "@/components/main-nav";
-import BottomNavigation from "@/components/bottom-nav";
-import Logo from "@/components/logo";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,19 +12,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className="flex items-start w-screen h-screen">
-          <div className="hidden lg:flex flex-col w-[300px] h-full border-r border-neutral-200">
-            <Logo />
-            <MainNavigation />
-            <BottomNavigation />
-          </div>
-          <div className="flex flex-col w-full h-full overflow-y-auto">
-            <div className="flex flex-col w-full h-full p-3">{children}</div>
-          </div>
-        </div>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <AuthenticationGuard>{children}</AuthenticationGuard>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

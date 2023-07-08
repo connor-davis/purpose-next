@@ -10,9 +10,45 @@ schema
 }
 
 type User @model {
+  id: ID!
   name: String!
+  username: String
   email: Email! @unique
+  image: URL
+  featuredImage: URL
+  metadata: UserMetadata
+  businessInformation: UserBusinessInformation
 }
+
+type UserMetadata @model {
+  idNumber: String
+  age: Number
+  gender: UserGender
+}
+
+type UserBusinessInformation @model {
+  name: String! @unique
+  description: String
+  registered: Boolean
+  registrationNumber: String @unique
+  employees: Int
+  schoolKids: Int
+  staff: Int
+}
+
+enum UserGender {
+  Male
+  Female
+}
+
+enum UserEthnicity {
+  White
+  Colored
+  Indian
+  Black
+}
+
+
 
 # Start your backend
 # https://grafbase.com/docs/cli
